@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyveils"
+version = "0.1.0"
+description = "A modern, extensible, plugin-based Python code obfuscation framework."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Zionix" }]
+requires-python = ">=3.9"
+keywords = ["obfuscation", "obfuscator", "security", "packaging", "ast"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+dependencies = [
+    "typer>=0.12",
+    "rich>=13.7",
+    "tomli>=2.0; python_version < '3.11'",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "black>=24.0",
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+
+[project.urls]
+Homepage = "https://github.com/ZionixxDev/PyVeils"
+Repository = "https://github.com/ZionixxDev/PyVeils"
+Issues = "https://github.com/ZionixxDev/PyVeils/issues"
+Changelog = "https://github.com/ZionixxDev/PyVeils/blob/main/CHANGELOG.md"
+
+[project.scripts]
+pyveils = "pyveils.cli.main:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pyveils"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -q"
+
+[tool.black]
+line-length = 100
+target-version = ["py39"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+packages = ["pyveils"]
